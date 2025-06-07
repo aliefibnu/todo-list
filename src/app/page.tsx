@@ -8,6 +8,7 @@ import AddForm from "./components/AddForm";
 import Tasks from "./components/Tasks";
 import Notiflix from "notiflix";
 import { sortTodos } from "@/modules/todoSorting";
+import EditForm from "./components/EditForm";
 
 export default function TodoPage() {
   const [todos, setTodos] = useState<Todo[]>([]);
@@ -17,6 +18,8 @@ export default function TodoPage() {
   const [isSorted, setIsSorted] = useState(false);
   const [search, setSearch] = useState("");
   const [filteredTodos, setFilteredTodos] = useState<Todo[]>([]);
+  const [idTodoToEdit, setIdTodoToEdit] = useState<number | null>(null);
+  const [isEditFormVisible, setIsEditFormVisible] = useState(false);
 
   useEffect(() => {
     try {
@@ -93,10 +96,20 @@ export default function TodoPage() {
               setTasks={setTodos}
               setIsSorted={setIsSorted}
               setFilteredTasks={setFilteredTodos}
+              setIdToEdit={setIdTodoToEdit}
+              setFormEditVisible={setIsEditFormVisible}
             />
           )}
         </div>
       </div>
+      {isEditFormVisible && idTodoToEdit && (
+        <EditForm
+          setTasks={setTodos}
+          idTaskToEdit={idTodoToEdit}
+          setIdTaskToEdit={setIdTodoToEdit}
+          setFormEditVisible={setIsEditFormVisible}
+        />
+      )}
     </div>
   );
 }

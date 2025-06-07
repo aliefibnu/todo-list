@@ -11,7 +11,7 @@ export default function Banner() {
   }, []);
 
   return (
-    <div className="bg-gradient-to-r from-purple-200 to-pink-200 dark:from-purple-800 dark:to-pink-800 text-slate-800 dark:text-white p-6 rounded-2xl shadow-lg max-w-2xl mx-auto transition-all duration-300">
+    <div className="bg-gradient-to-r from-purple-200 to-pink-200 dark:from-purple-800 dark:to-pink-800 text-slate-800 dark:text-white p-6 rounded-2xl shadow-lg max-w-2xl mx-auto transition-all duration-300  w-full">
       <div className="flex items-start space-x-4">
         <FaQuoteLeft className="text-2xl text-blue-500 dark:text-blue-300" />
         <div>

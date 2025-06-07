@@ -9,6 +9,8 @@ interface TasksProps {
   setTasks: (tasks: Todo[]) => void;
   setIsSorted: (isSorted: boolean) => void;
   setFilteredTasks: (tasks: Todo[]) => void;
+  setIdToEdit: (id: number | null) => void;
+  setFormEditVisible: (visible: boolean) => void;
 }
 
 export default function Tasks({
@@ -17,6 +19,8 @@ export default function Tasks({
   setTasks,
   setIsSorted,
   setFilteredTasks,
+  setIdToEdit,
+  setFormEditVisible,
 }: TasksProps) {
   const handleDelete = (id: number) => {
     Notiflix.Confirm.show(
@@ -60,7 +64,15 @@ export default function Tasks({
               animate={{ y: 0, opacity: 1 }}
               exit={{ y: 50, opacity: 0 }}
               transition={{ duration: 0.3 }}
-              className="bg-gradient-to-r from-blue-100 to-pink-100 dark:from-gray-700 dark:to-gray-800 p-4 rounded-xl shadow-md transition-all duration-300"
+              className={`bg-gradient-to-r p-4 rounded-xl shadow-md transition-all duration-300 cursor-pointer hover:scale-[102%]  ${
+                task.status === "completed"
+                  ? "from-gray-900 to-gray-900"
+                  : "from-blue-100 to-pink-100 dark:from-gray-700 dark:to-gray-800"
+              }`}
+              onClick={() => {
+                setIdToEdit(task.id);
+                setFormEditVisible(true);
+              }}
             >
               <div className="flex justify-between items-center">
                 <div className="flex items-center space-x-4">
@@ -76,14 +88,15 @@ export default function Tasks({
                     />
                   </div>
                   <div>
-                    <h3 className="text-lg font-semibold text-gray-800 dark:text-white">
+                    <h3
+                      className={`text-lg font-semibold ${
+                        task.status === "completed"
+                          ? "text-gray-200 dark:text-gray-700 line-through"
+                          : "text-gray-800 dark:text-white"
+                      }`}
+                    >
                       {task.name}
                     </h3>
-                    {task.category && (
-                      <p className="text-sm text-gray-600 dark:text-gray-300">
-                        Kategori: {task.category}
-                      </p>
-                    )}
                     <p
                       className={`text-sm ${
                         task.prioritizeLevel === "high"
@@ -103,21 +116,18 @@ export default function Tasks({
                     )}
                   </div>
                 </div>
-                <div className="flex space-x-2">
-                  <select
-                    value={task.status}
+                <div className="flex space-x-2 flex-row items-center">
+                  <input
+                    type="checkbox"
+                    className="form-checkbox h-4 w-4 text-blue-600 dark:text-blue-400 rounded-md border-2 border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 cursor-pointer transition-all duration-200 hover:border-blue-500 dark:hover:border-blue-300 focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:ring-opacity-50 accent-gray-500"
+                    checked={task.status === "completed"}
                     onChange={(e) =>
                       handleStatusChange(
                         task.id,
-                        e.target.value as Todo["status"]
+                        e.target.checked ? "completed" : "pending"
                       )
                     }
-                    className="p-2 rounded-lg bg-white dark:bg-gray-600 border-2 border-purple-300 dark:border-purple-600 focus:outline-none"
-                  >
-                    <option value="pending">Pending</option>
-                    <option value="in_progress">Dalam Proses</option>
-                    <option value="completed">Selesai</option>
-                  </select>
+                  />
                   <button
                     onClick={() => handleDelete(task.id)}
                     className="p-2 text-red-500 hover:text-red-600 transition-colors duration-300"

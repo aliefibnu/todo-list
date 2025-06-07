@@ -13,7 +13,7 @@ export interface Todo {
     | "Perjalanan"
     | "Lainnya";
   prioritizeLevel: "low" | "medium" | "high";
-  status: "pending" | "in_progress" | "completed";
+  status: "pending" | "completed";
   due: Date | null;
   created_at: Date;
 }
