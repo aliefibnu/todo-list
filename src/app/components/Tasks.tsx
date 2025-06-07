@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 
 interface TasksProps {
   tasks: Todo[];
+  filteredTasks: Todo[];
   setTasks: (tasks: Todo[]) => void;
   setIsSorted: (isSorted: boolean) => void;
   setFilteredTasks: (tasks: Todo[]) => void;
@@ -12,6 +13,7 @@ interface TasksProps {
 
 export default function Tasks({
   tasks,
+  filteredTasks,
   setTasks,
   setIsSorted,
   setFilteredTasks,
@@ -51,7 +53,7 @@ export default function Tasks({
         </p>
       ) : (
         <AnimatePresence>
-          {tasks.map((task) => (
+          {filteredTasks.map((task) => (
             <motion.div
               key={task.id}
               initial={{ y: -50, opacity: 0 }}

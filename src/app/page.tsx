@@ -88,7 +88,8 @@ export default function TodoPage() {
             <p className="text-center text-red-500">{error}</p>
           ) : (
             <Tasks
-              tasks={filteredTodos}
+              tasks={todos}
+              filteredTasks={filteredTodos}
               setTasks={setTodos}
               setIsSorted={setIsSorted}
               setFilteredTasks={setFilteredTodos}
