@@ -69,13 +69,15 @@ export default function Tasks({
                   ? "from-gray-900 to-gray-900"
                   : "from-blue-100 to-pink-100 dark:from-gray-700 dark:to-gray-800"
               }`}
-              onClick={() => {
-                setIdToEdit(task.id);
-                setFormEditVisible(true);
-              }}
             >
               <div className="flex justify-between items-center">
-                <div className="flex items-center space-x-4">
+                <div
+                  className="flex items-center space-x-4"
+                  onClick={() => {
+                    setIdToEdit(task.id);
+                    setFormEditVisible(true);
+                  }}
+                >
                   <div>
                     <img
                       src={
