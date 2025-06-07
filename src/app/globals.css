@@ -1,0 +1,42 @@
+@import "tailwindcss";
+
+:root {
+  --foreground-rgb: 30, 30, 30;
+  --background-start-rgb: 255, 231, 241;
+  --background-end-rgb: 219, 234, 254;
+  --select-bg: #ffffff;
+  --select-border: #d8b4fe;
+  --select-border-hover: #60a5fa;
+  --select-text: #1f2937;
+  --select-option-hover: #f3e8ff;
+  --select-placeholder: #9ca3af;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 229, 231, 235;
+    --background-start-rgb: 31, 41, 55;
+    --background-end-rgb: 55, 65, 81;
+    --select-bg: #4b5563;
+    --select-border: #9333ea;
+    --select-border-hover: #3b82f6;
+    --select-text: #e5e7eb;
+    --select-option-hover: #6b7280;
+    --select-placeholder: #9ca3af;
+  }
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+    to bottom right,
+    rgb(var(--background-start-rgb)),
+    rgb(var(--background-end-rgb))
+  );
+  transition: all 0.3s ease;
+}
+
+input,
+select {
+  transition: all 0.3s ease;
+}
