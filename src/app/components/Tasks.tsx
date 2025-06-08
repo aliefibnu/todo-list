@@ -34,6 +34,15 @@ export default function Tasks({
         setFilteredTasks(updatedTasks);
         localStorage.setItem("todos", JSON.stringify(updatedTasks));
         Notiflix.Notify.success("Tugas berhasil dihapus!");
+      },
+      () => {},
+      {
+        titleColor: "#f44336",
+        messageColor: "#555",
+        okButtonBackground: "#f44336",
+        okButtonColor: "#fff",
+        cancelButtonBackground: "#e0e0e0",
+        cancelButtonColor: "#333",
       }
     );
   };
@@ -70,9 +79,9 @@ export default function Tasks({
                   : "from-blue-100 to-pink-100 dark:from-gray-700 dark:to-gray-800"
               }`}
             >
-              <div className="flex justify-between items-center">
+              <div className="flex justify-between items-center gap-x-10 lg:gap-x-5 ">
                 <div
-                  className="flex items-center space-x-4"
+                  className="flex items-center space-x-4 grow"
                   onClick={() => {
                     setIdToEdit(task.id);
                     setFormEditVisible(true);
@@ -118,10 +127,10 @@ export default function Tasks({
                     )}
                   </div>
                 </div>
-                <div className="flex space-x-2 flex-row items-center">
+                <div className="flex space-x-4 flex-row items-center">
                   <input
                     type="checkbox"
-                    className="form-checkbox h-4 w-4 text-blue-600 dark:text-blue-400 rounded-md border-2 border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 cursor-pointer transition-all duration-200 hover:border-blue-500 dark:hover:border-blue-300 focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:ring-opacity-50 accent-gray-500"
+                    className="form-checkbox h-5 aspect-square text-blue-600 dark:text-blue-400 rounded-md border-2 border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 cursor-pointer transition-all duration-200 hover:border-blue-500 dark:hover:border-blue-300 focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:ring-opacity-50 accent-gray-500"
                     checked={task.status === "completed"}
                     onChange={(e) =>
                       handleStatusChange(
@@ -132,9 +141,9 @@ export default function Tasks({
                   />
                   <button
                     onClick={() => handleDelete(task.id)}
-                    className="p-2 text-red-500 hover:text-red-600 transition-colors duration-300"
+                    className=" text-red-500 hover:text-red-600 transition-colors duration-300"
                   >
-                    <FaTrash />
+                    <FaTrash className="h-7 aspect-square" />
                   </button>
                 </div>
               </div>
