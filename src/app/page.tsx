@@ -21,6 +21,7 @@ export default function TodoPage() {
   const [filteredTodos, setFilteredTodos] = useState<Todo[]>([]);
   const [idTodoToEdit, setIdTodoToEdit] = useState<number | null>(null);
   const [isEditFormVisible, setIsEditFormVisible] = useState(false);
+  const [progress, setProgress] = useState(0);
 
   useEffect(() => {
     try {
@@ -50,6 +51,19 @@ export default function TodoPage() {
   }, [todos, isSorted]);
 
   useEffect(() => {
+    if (todos.length > 0) {
+      const completedCount = todos.filter(
+        (todo) => todo.status === "completed"
+      ).length;
+      const totalCount = todos.length;
+      const thisProgress = Math.round((completedCount / totalCount) * 100);
+      setProgress(isNaN(thisProgress) ? 0 : thisProgress);
+    } else {
+      setProgress(0);
+    }
+  }, [todos]);
+
+  useEffect(() => {
     if (search === "") {
       setFilteredTodos(todos);
     } else {
@@ -75,13 +89,7 @@ export default function TodoPage() {
     <div className="flex flex-col items-center min-h-screen bg-gradient-to-br from-pink-100 to-blue-100 dark:from-gray-800 dark:to-gray-900 transition-colors duration-300 overflow-x-hidden">
       <div className="w-full max-w-4xl px-4 py-8">
         <Banner />
-        <ProgressBar
-          progress={Math.round(
-            (todos.filter((todo) => todo.status === "completed").length /
-              todos.length) *
-              100
-          )}
-        />
+        <ProgressBar progress={progress} />
         <div className="mt-6 space-y-4">
           <div className="flex justify-between items-center gap-x-10">
             <SearchBar searchValue={search} setSearchValue={setSearch} />
