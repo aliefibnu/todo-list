@@ -48,7 +48,7 @@ Ikuti langkah-langkah berikut untuk menjalankan proyek di lokal:
 1. **Klon Repositori**
 
    ```bash
-   git clone <URL_REPOSITORI_ANDA>
+   git clone https://github.com/aliefibnu/todo-list.git
    cd todo-list
    ```
 
