@@ -80,7 +80,7 @@ export default function Tasks({
             >
               <div className="flex justify-between items-center gap-x-10 lg:gap-x-5 ">
                 <div
-                  className="flex items-center space-x-4 grow"
+                  className="flex items-center space-x-1 grow"
                   onClick={() => {
                     setIdToEdit(task.id);
                     setFormEditVisible(true);
