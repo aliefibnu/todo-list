@@ -90,10 +90,10 @@ export default function Tasks({
                     <img
                       src={
                         task.prioritizeLevel === "high"
-                          ? "/media/icon/task_icon/high.svg"
+                          ? "/media/task_icon/high.svg"
                           : task.prioritizeLevel === "medium"
-                          ? "/media/icon/task_icon/medium.svg"
-                          : "/media/icon/task_icon/" + task.category + ".svg"
+                          ? "/media/task_icon/medium.svg"
+                          : "/media/task_icon/" + task.category + ".svg"
                       }
                     />
                   </div>
