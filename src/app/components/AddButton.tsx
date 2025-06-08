@@ -1,4 +1,4 @@
-import { FaTimes, FaPlus } from "react-icons/fa";
+import { FaPlus } from "react-icons/fa";
 
 interface AddButtonProps {
   onClick: () => void;
