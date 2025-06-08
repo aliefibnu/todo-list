@@ -55,7 +55,6 @@ export default function Tasks({
     setFilteredTasks(updatedTasks);
     setIsSorted(false);
     localStorage.setItem("todos", JSON.stringify(updatedTasks));
-    Notiflix.Notify.info("Status tugas diperbarui!");
   };
 
   return (

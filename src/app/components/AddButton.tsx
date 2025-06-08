@@ -13,7 +13,7 @@ export default function AddButton({ onClick, isFormShowed }: AddButtonProps) {
     >
       <FaPlus
         className={`transition-all duration-500 text-lg ${
-          isFormShowed && "rotate-45"
+          isFormShowed && "rotate-135 text-red-400"
         }`}
       />
     </button>

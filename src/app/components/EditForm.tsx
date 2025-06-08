@@ -26,6 +26,7 @@ interface EditFormProps {
   idTaskToEdit: number;
   setFormEditVisible: (visible: boolean) => void;
   setIdTaskToEdit: (id: number | null) => void;
+  goSorting: (isSorted: boolean) => void;
 }
 
 export default function EditForm({
@@ -33,6 +34,7 @@ export default function EditForm({
   idTaskToEdit,
   setFormEditVisible,
   setIdTaskToEdit,
+  goSorting,
 }: EditFormProps) {
   const [name, setName] = useState("");
   const [category, setCategory] = useState<Todo["category"]>("Lainnya");
@@ -71,23 +73,25 @@ export default function EditForm({
     }
 
     setTasks((prevTasks: Todo[]) => {
-      const updatedTasks = prevTasks.map((task): Todo =>
-        task.id === idTaskToEdit
-          ? {
-              ...task,
-              name: name.trim(),
-              category,
-              prioritizeLevel: priority,
-              status,
-              due: dueDate ? new Date(dueDate) : null,
-            }
-          : task
+      const updatedTasks = prevTasks.map(
+        (task): Todo =>
+          task.id === idTaskToEdit
+            ? {
+                ...task,
+                name: name.trim(),
+                category,
+                prioritizeLevel: priority,
+                status,
+                due: dueDate ? new Date(dueDate) : null,
+              }
+            : task
       );
 
       // Simpan ke localStorage
       localStorage.setItem("todos", JSON.stringify(updatedTasks));
       setFormEditVisible(false);
       setIdTaskToEdit(null);
+      goSorting(false); // Panggil fungsi sorting setelah update
       return updatedTasks;
     });
     Notiflix.Notify.success("Tugas berhasil diperbarui!");
@@ -219,13 +223,13 @@ export default function EditForm({
               <button
                 type="button"
                 onClick={handleCancel}
-                className="bg-gradient-to-r from-amber-400 to-yellow-400 dark:from-amber-600 dark:to-yellow-600 text-white p-3 rounded-lg shadow-md hover:shadow-lg transition-all duration-300"
+                className="bg-gradient-to-r from-amber-400 to-yellow-400 dark:from-amber-600 dark:to-yellow-600 text-white p-3 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 cursor-pointer"
               >
                 Batal Edit
               </button>
               <button
                 type="submit"
-                className="grow bg-gradient-to-r from-blue-400 to-purple-400 dark:from-blue-600 dark:to-purple-600 text-white p-3 rounded-lg shadow-md hover:shadow-lg transition-all duration-300"
+                className="grow bg-gradient-to-r from-blue-400 to-purple-400 dark:from-blue-600 dark:to-purple-600 text-white p-3 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 cursor-pointer"
               >
                 Edit Tugas
               </button>

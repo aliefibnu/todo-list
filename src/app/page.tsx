@@ -9,6 +9,7 @@ import Tasks from "./components/Tasks";
 import Notiflix from "notiflix";
 import { sortTodos } from "@/modules/todoSorting";
 import EditForm from "./components/EditForm";
+import ProgressBar from "./components/ProgressBar";
 
 export default function TodoPage() {
   const [todos, setTodos] = useState<Todo[]>([]);
@@ -74,6 +75,13 @@ export default function TodoPage() {
     <div className="flex flex-col items-center min-h-screen bg-gradient-to-br from-pink-100 to-blue-100 dark:from-gray-800 dark:to-gray-900 transition-colors duration-300 overflow-x-hidden">
       <div className="w-full max-w-4xl px-4 py-8">
         <Banner />
+        <ProgressBar
+          progress={Math.round(
+            (todos.filter((todo) => todo.status === "completed").length /
+              todos.length) *
+              100
+          )}
+        />
         <div className="mt-6 space-y-4">
           <div className="flex justify-between items-center gap-x-10">
             <SearchBar searchValue={search} setSearchValue={setSearch} />
@@ -108,6 +116,7 @@ export default function TodoPage() {
           idTaskToEdit={idTodoToEdit}
           setIdTaskToEdit={setIdTodoToEdit}
           setFormEditVisible={setIsEditFormVisible}
+          goSorting={setIsSorted}
         />
       )}
     </div>

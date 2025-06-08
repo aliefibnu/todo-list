@@ -16,18 +16,18 @@ export function sortTodos(todos: Todo[]): Todo[] {
       );
     }
 
-    // Urutkan berdasarkan kategori (null di akhir)
-    if (a.category !== b.category) {
-      if (!a.category) return 1;
-      if (!b.category) return -1;
-      return a.category.localeCompare(b.category);
-    }
-
     // Urutkan berdasarkan due date (null di akhir)
     if (a.due !== b.due) {
       if (!a.due) return 1;
       if (!b.due) return -1;
       return new Date(a.due).getTime() - new Date(b.due).getTime();
+    }
+
+    // Urutkan berdasarkan kategori (null di akhir)
+    if (a.category !== b.category) {
+      if (!a.category) return 1;
+      if (!b.category) return -1;
+      return a.category.localeCompare(b.category);
     }
 
     // Urutkan berdasarkan created_at
